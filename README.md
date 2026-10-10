@@ -1,5 +1,7 @@
 # Lift Log
 
+CODED BY - MOHAMMED ALKHUDARI - 2026
+
 A native mobile gym-session tracker (Flutter + SQLite) built from
 **5-Day-Machine-Hypertrophy-Program_1.xlsx**. Android and iOS only — there is no
 web build.
@@ -25,19 +27,19 @@ web build.
 Three ways in: the **tune** icon in a session's app bar (full day editor), the
 pencil on any exercise card, or a long-press on a day card in Train.
 
-Edits are stored as a *diff* against the printed program, not a copy of it. If
+Edits are stored as a _diff_ against the printed program, not a copy of it. If
 you only change the rest timer, the sets and rep range still track the workbook.
 Every screen reads the program through that layer, so a changed set count
 immediately moves the day's target and the week's completion state.
 
-| Action | What happens |
-|---|---|
-| Edit a program exercise | Only the fields you changed are stored; "Reset" restores it |
-| Add an exercise | Appended to the day, counts toward its set target |
+| Action                    | What happens                                                               |
+| ------------------------- | -------------------------------------------------------------------------- |
+| Edit a program exercise   | Only the fields you changed are stored; "Reset" restores it                |
+| Add an exercise           | Appended to the day, counts toward its set target                          |
 | Remove a program exercise | Hidden, logged sets kept, listed under "Removed from this day" to put back |
-| Delete an added exercise | Removed along with everything logged against it |
-| Reorder | Drag handles in the day editor |
-| Reset day | Everything back to the printed program |
+| Delete an added exercise  | Removed along with everything logged against it                            |
+| Reorder                   | Drag handles in the day editor                                             |
+| Reset day                 | Everything back to the printed program                                     |
 
 **Swapping a movement resets its history.** Each logged set records the movement
 name, and the "last time" hint only matches sets logged under the current name.
@@ -48,21 +50,21 @@ prefilling a load you lifted on a different machine.
 
 The workbook stops at week 5. This app does not: weeks count up forever.
 
-| Week | 1 | 2 | 3 | 4 | 5 | 6 | 7 | … | 10 | 11 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Block | 1 | 1 | 1 | 1 | 1 | 2 | 2 | | 2 | 3 |
-| Phase | Calibration | Build | Load up | Peak | Push | Calibration | Build | | Push | Calibration |
+| Week  | 1           | 2     | 3       | 4    | 5    | 6           | 7     | …   | 10   | 11          |
+| ----- | ----------- | ----- | ------- | ---- | ---- | ----------- | ----- | --- | ---- | ----------- |
+| Block | 1           | 1     | 1       | 1    | 1    | 2           | 2     |     | 2    | 3           |
+| Phase | Calibration | Build | Load up | Peak | Push | Calibration | Build |     | Push | Calibration |
 
 Week 1 of every block after the first shows a reminder to swap one exercise per
 day and start 2-3% above the previous block's week-4 loads. Use the `‹ ›` arrows
-in the header, the week strip, or Settings → *Jump to a week* to move around;
+in the header, the week strip, or Settings → _Jump to a week_ to move around;
 there is no upper bound.
 
 ### Deload weeks are switched off
 
 The workbook deloads on week 5 of each block at half volume. That is currently
 disabled at the user's request: every week runs the full prescription, and the
-fifth week is an ordinary training week labelled *Push*.
+fifth week is an ordinary training week labelled _Push_.
 
 It is one flag — `Program.deloadEnabled` in [`lib/program.dart`](lib/program.dart).
 Set it back to `true` and the half-set maths, the "half sets" header, the
@@ -83,7 +85,7 @@ Arabic renders in **Zain** (SIL Open Font License; the licence ships in
 Latin text better than an Arabic-first face.
 
 The translations live in [`lib/program_ar.dart`](lib/program_ar.dart) as a side
-table keyed by the English ids, deliberately *not* as fields on the program
+table keyed by the English ids, deliberately _not_ as fields on the program
 data. `Exercise.name` is the identity written into `workout_set.movement` and
 matched by the "last time" hint, so it must never change with the UI language —
 `i18n_test.dart` asserts exactly that. An exercise you rename yourself keeps
@@ -127,7 +129,7 @@ Backups from older versions still import. The envelope is still `format: 1`,
 a table the old export did not have (`gym`) comes in empty, and a restore always
 ends by making sure a gym exists. Sets imported without a gym match every gym in
 the "last time" lookup, so nothing logged before gyms existed is stranded —
-though the Progress chart's per-gym filter will not show them, only *All gyms*.
+though the Progress chart's per-gym filter will not show them, only _All gyms_.
 
 A restore **replaces** everything currently in the app rather than merging, and
 says what it found — sets, weeks, edited exercises, export date — before you
